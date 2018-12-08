@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".WriteActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/date_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textAlignment="viewStart"
+            android:paddingStart="15dp"
+            android:onClick="datePopup"
+            android:text="DATE"
+            android:textColor="#EB8F90" />
+
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018.11.12" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="TEXT"
+        android:textColor="#EB8F90"/>
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:hint="글을 입력하세요"
+        android:background="@null"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="375dp"
+            android:layout_weight="1"
+            android:onClick="cancelPopup"
+            android:background="#EB8F90"
+            android:text="취소"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="375dp"
+            android:layout_weight="1"
+            android:onClick="savePopup"
+            android:background="#EB8F90"
+            android:text="저장"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+</LinearLayout>
