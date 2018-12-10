@@ -16,12 +16,13 @@
             android:id="@+id/date_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="datePopup"
             android:background="@null"
             android:textAlignment="viewStart"
             android:paddingStart="15dp"
-            android:onClick="datePopup"
             android:text="DATE"
             android:textColor="#EB8F90" />
+        <!--android:onClick="datePopup"!-->
 
         <TextView
             android:id="@+id/date_text"

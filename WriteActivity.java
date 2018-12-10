@@ -1,26 +1,29 @@
-package com.example.soyeonlee.myapplication7;
+package com.example.soyeonlee.myapplication8;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
 
 public class WriteActivity extends AppCompatActivity {
 
-    //DBHelper helper = new DBHelper(this,"NOTE",null,1);
     DatePicker datePicker;
     final int DIALOG_DATE = 1;
     TextView date_text;
+    EditText edit_text;
 
     private int mYear;
     private int mMonth;
@@ -31,6 +34,7 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
         date_text = (TextView) findViewById(R.id.date_text);
+        edit_text = (EditText) findViewById(R.id.edit_text);
 
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -40,13 +44,15 @@ public class WriteActivity extends AppCompatActivity {
         updateDate();
     }
 
+    //DATE버튼 클릭 이벤트
+    public void datePopup (View v) {
+        showDialog(DIALOG_DATE);
+    }
+
     public void updateDate() {
         date_text.setText(String.format("%d년 %d월 %d일",mYear,mMonth+1,mDay));
     }
 
-    public void datePopup (View v) {
-        showDialog(DIALOG_DATE);
-    }
 
     private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -63,12 +69,11 @@ public class WriteActivity extends AppCompatActivity {
     }
 
 
-
-
+    //취소버튼 클릭 이벤트
     public void cancelPopup (View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("");
-        builder.setMessage("지금 나가면 글이 저장되지 않습니다. 나가시겠습니까?");
+        builder.setMessage("지금 나가면 글이 저장되지 않습니다.\n나가시겠습니까?");
 
         // 글 저장 안하고 나가기
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -87,11 +92,14 @@ public class WriteActivity extends AppCompatActivity {
         });
         builder.show();
     }
-/*
+
+    //저장버튼 클릭 이벤트
     public void savePopup (View v) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        //String sql = "INSERT INTO NOTE VALUES ('"+date+"',)";
+        Toast.makeText(getApplicationContext(),edit_text.getText().toString(),Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+        //finish();
     }
-*/
 
 }
