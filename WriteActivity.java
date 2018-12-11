@@ -20,10 +20,13 @@ import java.util.Locale;
 
 public class WriteActivity extends AppCompatActivity {
 
+    SQLiteDatabase db;
+    DBHelper helper;
     DatePicker datePicker;
     final int DIALOG_DATE = 1;
     TextView date_text;
     EditText edit_text;
+    String dbDate;
 
     private int mYear;
     private int mMonth;
@@ -35,6 +38,9 @@ public class WriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write);
         date_text = (TextView) findViewById(R.id.date_text);
         edit_text = (EditText) findViewById(R.id.edit_text);
+
+        helper = new DBHelper(this);
+        //db = helper.getWritableDatabase();
 
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -60,6 +66,7 @@ public class WriteActivity extends AppCompatActivity {
             mYear = year;
             mMonth = monthOfYear;
             mDay = dayOfMonth;
+            //dbDate = Integer.toString(mYear) + "년" + Integer.toString(mMonth+1) + "월" + Integer.toString(mDay) +"일";
             updateDate();
         }
     };
@@ -95,11 +102,24 @@ public class WriteActivity extends AppCompatActivity {
 
     //저장버튼 클릭 이벤트
     public void savePopup (View v) {
+        save_values();
         Toast.makeText(getApplicationContext(),edit_text.getText().toString(),Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
         //finish();
+    }
+
+    public void save_values() {
+        db = helper.getWritableDatabase();
+        //db.execSQL(ContractDB.SQL_DELETE);
+
+        String input_date = date_text.getText().toString();
+        String input_write = edit_text.getText().toString();
+
+        String sqlInsert = ContractDB.SQL_INSERT + " (" + "'" + input_date + "', " + "'" + input_write + "'" + ")";
+        db.execSQL(sqlInsert);
+        db.close();
     }
 
 }
