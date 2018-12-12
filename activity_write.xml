@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:onClick="datePopup"
+                android:onClick="dateClick"
                 android:paddingStart="15dp"
                 android:text="DATE"
                 android:textAlignment="viewStart"
@@ -73,7 +73,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#EB8F90"
-            android:onClick="cancelPopup"
+            android:onClick="cancelClick"
             android:text="취소"
             android:textColor="#ffffff"
             android:textStyle="bold" />
@@ -84,7 +84,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#EB8F90"
-            android:onClick="savePopup"
+            android:onClick="saveClick"
             android:text="저장"
             android:textColor="#ffffff"
             android:textStyle="bold" />

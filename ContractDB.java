@@ -15,5 +15,7 @@ public class ContractDB {
     //public static final String SQL_INSERT = "INSERT OR REPLACE INTO" + TABLE_NAME;
     public static final String SQL_INSERT = "INSERT OR REPLACE INTO " + TABLE_NAME + " "
             + "(" + COL_DATE + ", " + COL_WRITE + ") VALUES";
-    public static final String SQL_DELETE = "DELETE FROM " + TABLE_NAME;
+    //public static final String SQL_DELETE = "DELETE FROM " + TABLE_NAME;
+    public static final String SQL_DELETE = "DELETE FROM " + TABLE_NAME +" WHERE " + _ID + " = ";
+    public static final String SQL_UPDATE = "UPDATE " + TABLE_NAME + " SET";
 }

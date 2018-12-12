@@ -16,17 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Locale;
 
-public class WriteActivity extends AppCompatActivity {
+public class ModifyActivity extends AppCompatActivity {
 
     SQLiteDatabase db;
     DBHelper helper;
     DatePicker datePicker;
     final int DIALOG_DATE = 1;
-    TextView date_text;
-    EditText edit_text;
-    String dbDate;
+    TextView date_text2;
+    EditText edit_text2;
+    String dateModify;
+    String writeModify;
+    int positionModify;
 
     private int mYear;
     private int mMonth;
@@ -35,30 +36,39 @@ public class WriteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write);
-        date_text = (TextView) findViewById(R.id.date_text);
-        edit_text = (EditText) findViewById(R.id.edit_text);
+        setContentView(R.layout.activity_modify);
+
+        date_text2 = (TextView) findViewById(R.id.date_text2);
+        edit_text2 = (EditText) findViewById(R.id.edit_text2);
+
+        Intent intent = getIntent();
+
+        dateModify = intent.getStringExtra("dateModify");
+        date_text2.setText(dateModify);
+
+        writeModify = intent.getStringExtra("writeModify");
+        edit_text2.setText(writeModify);
+
+        positionModify = intent.getIntExtra("positionModify",0);
 
         helper = new DBHelper(this);
-        //db = helper.getWritableDatabase();
 
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        updateDate();
+        //updateDate();
     }
 
     //DATE버튼 클릭 이벤트
-    public void dateClick (View v) {
+    public void dateClick2 (View v) {
         showDialog(DIALOG_DATE);
     }
 
     public void updateDate() {
-        date_text.setText(String.format("%d년 %d월 %d일",mYear,mMonth+1,mDay));
+        date_text2.setText(String.format("%d년 %d월 %d일",mYear,mMonth+1,mDay));
     }
-
 
     private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -77,7 +87,7 @@ public class WriteActivity extends AppCompatActivity {
 
 
     //취소버튼 클릭 이벤트
-    public void cancelClick (View v) {
+    public void cancelClick2 (View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("");
         builder.setMessage("지금 나가면 글이 저장되지 않습니다.\n나가시겠습니까?");
@@ -95,14 +105,15 @@ public class WriteActivity extends AppCompatActivity {
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
             }
         });
         builder.show();
     }
 
     //저장버튼 클릭 이벤트
-    public void saveClick (View v) {
-        save_values();
+    public void saveClick2 (View v) {
+        save_values(positionModify);
         Toast.makeText(getApplicationContext(),"Save",Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
@@ -110,16 +121,18 @@ public class WriteActivity extends AppCompatActivity {
         //finish();
     }
 
-    public void save_values() {
+    public void save_values(int p) {
         db = helper.getWritableDatabase();
-        //db.execSQL(ContractDB.SQL_DELETE);
+        String sqlSelect = ContractDB.SQL_SELECT;
+        Cursor c = db.rawQuery(sqlSelect,null);
+        c.moveToPosition(p);
+        int id = c.getInt(0);
+        String input_date = date_text2.getText().toString();
+        String input_write = edit_text2.getText().toString();
 
-        String input_date = date_text.getText().toString();
-        String input_write = edit_text.getText().toString();
-
-        String sqlInsert = ContractDB.SQL_INSERT + " (" + "'" + input_date + "', " + "'" + input_write + "'" + ")";
-        db.execSQL(sqlInsert);
+        String sqlUpdate = ContractDB.SQL_UPDATE + " DATE" + "=" +"'"+ input_date + "'" + ","
+                + " WRTIE" + "=" + "'" + input_write + "'" + " WHERE" + " _ID" + "=" + id;
+        db.execSQL(sqlUpdate);
         db.close();
     }
-
 }
