@@ -9,7 +9,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
     public DBHelper(Context context) {
-        super(context, "notelist.db", null, 1);
+        super(context, "notelist2.db", null, 1);
     }
 
     @Override

@@ -6,12 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +28,13 @@ public class WriteActivity extends AppCompatActivity {
     final int DIALOG_DATE = 1;
     TextView date_text;
     EditText edit_text;
-    String dbDate;
+    ImageView imageView;
 
     private int mYear;
     private int mMonth;
     private int mDay;
+
+    Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class WriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write);
         date_text = (TextView) findViewById(R.id.date_text);
         edit_text = (EditText) findViewById(R.id.edit_text);
+        imageView = (ImageView) findViewById(R.id.imageView);
 
         helper = new DBHelper(this);
         //db = helper.getWritableDatabase();
@@ -73,6 +78,33 @@ public class WriteActivity extends AppCompatActivity {
 
     protected Dialog onCreateDialog(int id) {
         return new DatePickerDialog(this,mDateSetListener,mYear,mMonth,mDay);
+    }
+
+    public void imageClick (View v) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,1);
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // super.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode == 1) {
+
+            if(resultCode == RESULT_OK) {
+
+                try {
+                    uri = data.getData();
+                    imageView.setImageURI(uri);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
 
@@ -116,8 +148,10 @@ public class WriteActivity extends AppCompatActivity {
 
         String input_date = date_text.getText().toString();
         String input_write = edit_text.getText().toString();
+        String input_image = uri.toString();
 
-        String sqlInsert = ContractDB.SQL_INSERT + " (" + "'" + input_date + "', " + "'" + input_write + "'" + ")";
+        String sqlInsert = ContractDB.SQL_INSERT + " (" + "'" + input_date + "', " + "'" + input_image + "'," + "'" + input_write + "'" + ")";
+        //String sqlInsert = ContractDB.SQL_INSERT + " (" + "'" + input_date + "', " + "'" + input_write + "'" + ")";
         db.execSQL(sqlInsert);
         db.close();
     }

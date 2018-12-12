@@ -12,8 +12,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.Calendar;
 
@@ -24,9 +27,11 @@ public class ModifyActivity extends AppCompatActivity {
     DatePicker datePicker;
     final int DIALOG_DATE = 1;
     TextView date_text2;
+    ImageView imageView2;
     EditText edit_text2;
     String dateModify;
     String writeModify;
+    String imageModify;
     int positionModify;
 
     private int mYear;
@@ -39,12 +44,16 @@ public class ModifyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_modify);
 
         date_text2 = (TextView) findViewById(R.id.date_text2);
+        imageView2 = (ImageView) findViewById(R.id.imageView2);
         edit_text2 = (EditText) findViewById(R.id.edit_text2);
 
         Intent intent = getIntent();
 
         dateModify = intent.getStringExtra("dateModify");
         date_text2.setText(dateModify);
+
+        imageModify = intent.getStringExtra("imageModify");
+        Glide.with(this).load(imageModify).into(imageView2);
 
         writeModify = intent.getStringExtra("writeModify");
         edit_text2.setText(writeModify);
@@ -128,10 +137,12 @@ public class ModifyActivity extends AppCompatActivity {
         c.moveToPosition(p);
         int id = c.getInt(0);
         String input_date = date_text2.getText().toString();
+        //String input_image = imageView2.getResources();
         String input_write = edit_text2.getText().toString();
 
         String sqlUpdate = ContractDB.SQL_UPDATE + " DATE" + "=" +"'"+ input_date + "'" + ","
-                + " WRTIE" + "=" + "'" + input_write + "'" + " WHERE" + " _ID" + "=" + id;
+                + " IMAGE" + "=" + "'" + input_write + "'" + " WRITE" + "=" + "'" + input_write + "'"
+                + " WHERE" + " _ID" + "=" + id;
         db.execSQL(sqlUpdate);
         db.close();
     }

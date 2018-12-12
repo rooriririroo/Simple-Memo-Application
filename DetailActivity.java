@@ -4,12 +4,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -22,8 +26,11 @@ public class DetailActivity extends AppCompatActivity {
     ArrayList<ListItem> listItemArrayList;
 
     TextView date_detailView;
+    ImageView image_detailView;
     TextView write_detailView;
+
     String dateDetail;
+    String imageDetail;
     String writeDetail;
     int positionDetail;
 
@@ -33,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         date_detailView = (TextView) findViewById(R.id.date_detailView);
+        image_detailView = (ImageView) findViewById(R.id.image_detailView);
         write_detailView = (TextView) findViewById(R.id.write_detailView);
 
         helper = new DBHelper(this);
@@ -43,6 +51,9 @@ public class DetailActivity extends AppCompatActivity {
         dateDetail = intent.getStringExtra("dateDetail");
         date_detailView.setText(dateDetail);
 
+        imageDetail = intent.getStringExtra("imageDetail");
+        Glide.with(this).load(imageDetail).into(image_detailView);
+
         writeDetail = intent.getStringExtra("writeDetail");
         write_detailView.setText(writeDetail);
 
@@ -52,6 +63,7 @@ public class DetailActivity extends AppCompatActivity {
     public void modifyClick(View v) {
         Intent intent = new Intent(getApplicationContext(),ModifyActivity.class);
         intent.putExtra("dateModify",dateDetail);
+        intent.putExtra("imageModify",imageDetail);
         intent.putExtra("writeModify",writeDetail);
         intent.putExtra("positionModify",positionDetail);
         startActivity(intent);

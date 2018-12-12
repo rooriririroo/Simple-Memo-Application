@@ -51,6 +51,14 @@
                 android:textColor="#EB8F90"
                 android:textSize="16sp" />
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ap"
+                />
+
             <EditText
                 android:id="@+id/edit_text2"
                 android:layout_width="wrap_content"

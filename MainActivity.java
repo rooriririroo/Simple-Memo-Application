@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this,DetailActivity.class);
                 intent.putExtra("dateDetail",listItemArrayList.get(position).getDate());
+                intent.putExtra("imageDetail",listItemArrayList.get(position).getImage());
                 intent.putExtra("writeDetail",listItemArrayList.get(position).getText());
                 intent.putExtra("positionDetail",position);
                 startActivity(intent);
@@ -98,8 +99,9 @@ public class MainActivity extends AppCompatActivity {
             for(int i = 0; i<recordCount; i++) {
                 c.moveToNext();
                 String dateStr = c.getString(1);
-                String textStr = c.getString(2);
-                listItemArrayList.add(new ListItem(dateStr,textStr));
+                String imageStr = c.getString(2);
+                String textStr = c.getString(3);
+                listItemArrayList.add(new ListItem(dateStr,imageStr,textStr));
             }
             c.close();
             /////////

@@ -1,11 +1,15 @@
 package com.example.soyeonlee.myapplication8;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -19,8 +23,9 @@ public class ListItemAdapter extends BaseAdapter {
     ViewHolder viewHolder;
 
     class ViewHolder {
-        TextView dateView;
-        TextView textView;
+        TextView dateItemView;
+        TextView textItemView;
+        ImageView imageItemView;
     }
 
 
@@ -57,15 +62,18 @@ public class ListItemAdapter extends BaseAdapter {
             //from(context,)
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,null);
             viewHolder = new ViewHolder();
-            viewHolder.dateView = (TextView) convertView.findViewById(R.id.dateView);
-            viewHolder.textView = (TextView) convertView.findViewById(R.id.textView);
+            viewHolder.dateItemView = (TextView) convertView.findViewById(R.id.dateItemView);
+            viewHolder.imageItemView = (ImageView) convertView.findViewById(R.id.imageItemView);
+            viewHolder.textItemView = (TextView) convertView.findViewById(R.id.textItemView);
             convertView.setTag(viewHolder);
         }
         else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.dateView.setText(listItemArrayList.get(position).getDate());
-        viewHolder.textView.setText(listItemArrayList.get(position).getText());
+        viewHolder.dateItemView.setText(listItemArrayList.get(position).getDate());
+        Glide.with(context).load(listItemArrayList.get(position).getImage()).into(viewHolder.imageItemView);
+        //viewHolder.imageView.setImageResource(listItemArrayList.get(position).getImage());
+        viewHolder.textItemView.setText(listItemArrayList.get(position).getText());
 
         return convertView;
     }
