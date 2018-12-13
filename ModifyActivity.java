@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +39,9 @@ public class ModifyActivity extends AppCompatActivity {
     private int mMonth;
     private int mDay;
 
+    String input_image;
+    Uri uri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,7 @@ public class ModifyActivity extends AppCompatActivity {
 
         imageModify = intent.getStringExtra("imageModify");
         Glide.with(this).load(imageModify).into(imageView2);
+        input_image = imageModify;
 
         writeModify = intent.getStringExtra("writeModify");
         edit_text2.setText(writeModify);
@@ -94,6 +99,33 @@ public class ModifyActivity extends AppCompatActivity {
         return new DatePickerDialog(this,mDateSetListener,mYear,mMonth,mDay);
     }
 
+    public void imageClick2 (View v) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,2);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // super.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode == 2) {
+
+            if(resultCode == RESULT_OK) {
+
+                try {
+                    uri = data.getData();
+                    imageView2.setImageURI(uri);
+                    input_image = uri.toString();//
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
 
     //취소버튼 클릭 이벤트
     public void cancelClick2 (View v) {
@@ -127,7 +159,6 @@ public class ModifyActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
-        //finish();
     }
 
     public void save_values(int p) {
@@ -136,14 +167,27 @@ public class ModifyActivity extends AppCompatActivity {
         Cursor c = db.rawQuery(sqlSelect,null);
         c.moveToPosition(p);
         int id = c.getInt(0);
+
         String input_date = date_text2.getText().toString();
-        //String input_image = imageView2.getResources();
+
+        //input_image = uri.toString();
+
+        /*
+        if(input_image == imageModify) {
+            input_image = imageModify;
+        }
+        else {
+            input_image = uri.toString();
+        }*/
+
         String input_write = edit_text2.getText().toString();
 
+
         String sqlUpdate = ContractDB.SQL_UPDATE + " DATE" + "=" +"'"+ input_date + "'" + ","
-                + " IMAGE" + "=" + "'" + input_write + "'" + " WRITE" + "=" + "'" + input_write + "'"
+                + " IMAGE" + "=" + "'" + input_image + "'" + ","+ " WRITE" + "=" + "'" + input_write + "'"
                 + " WHERE" + " _ID" + "=" + id;
         db.execSQL(sqlUpdate);
+        c.close();
         db.close();
     }
 }

@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,7 +35,9 @@ public class WriteActivity extends AppCompatActivity {
     private int mMonth;
     private int mDay;
 
+    String input_image;
     Uri uri;
+    Uri buri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,6 @@ public class WriteActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,1);
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -134,11 +136,16 @@ public class WriteActivity extends AppCompatActivity {
 
     //저장버튼 클릭 이벤트
     public void saveClick (View v) {
+        if(imageView.getDrawable() != null) {
         save_values();
-        Toast.makeText(getApplicationContext(),"Save",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"save",Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "사진 필수", Toast.LENGTH_SHORT).show();
+        }
         //finish();
     }
 
@@ -147,8 +154,15 @@ public class WriteActivity extends AppCompatActivity {
         //db.execSQL(ContractDB.SQL_DELETE);
 
         String input_date = date_text.getText().toString();
+
+        //buri = Uri.parse("android.res://"+this.getPackageName()+"/drawble/ap");
+        //String input_image = buri.toString();
+
+        input_image = uri.toString();
+
+
         String input_write = edit_text.getText().toString();
-        String input_image = uri.toString();
+
 
         String sqlInsert = ContractDB.SQL_INSERT + " (" + "'" + input_date + "', " + "'" + input_image + "'," + "'" + input_write + "'" + ")";
         //String sqlInsert = ContractDB.SQL_INSERT + " (" + "'" + input_date + "', " + "'" + input_write + "'" + ")";

@@ -42,12 +42,14 @@
                     android:text="2018.11.12" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/text_name2"
+            <Button
+                android:id="@+id/image_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="TEXT"
+                android:onClick="imageClick2"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:text="PHOTO"
                 android:textColor="#EB8F90"
                 android:textSize="16sp" />
 
@@ -58,6 +60,15 @@
                 android:layout_marginStart="15dp"
                 android:src="@drawable/ap"
                 />
+
+            <TextView
+                android:id="@+id/text_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="TEXT"
+                android:textColor="#EB8F90"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/edit_text2"
