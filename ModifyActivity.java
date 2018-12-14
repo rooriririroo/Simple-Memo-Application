@@ -81,7 +81,7 @@ public class ModifyActivity extends AppCompatActivity {
     }
 
     public void updateDate() {
-        date_text2.setText(String.format("%d년 %d월 %d일",mYear,mMonth+1,mDay));
+        date_text2.setText(String.format("%d년 %02d월 %02d일",mYear,mMonth+1,mDay));
     }
 
     private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -155,7 +155,7 @@ public class ModifyActivity extends AppCompatActivity {
     //저장버튼 클릭 이벤트
     public void saveClick2 (View v) {
         save_values(positionModify);
-        Toast.makeText(getApplicationContext(),"Save",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"수정",Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);

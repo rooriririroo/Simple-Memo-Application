@@ -80,7 +80,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 delete_values(positionDetail);
-                Toast.makeText(getApplicationContext(),"Delete",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"삭제",Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
@@ -104,6 +104,7 @@ public class DetailActivity extends AppCompatActivity {
         int id = c.getInt(0);
         String sqlDelete = ContractDB.SQL_DELETE + id;
         db.execSQL(sqlDelete);
+        c.close();//
         db.close();
     }
 }

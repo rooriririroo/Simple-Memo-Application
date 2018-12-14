@@ -25,38 +25,42 @@
                 <Button
                     android:id="@+id/date_button2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="#FFB471"
                     android:onClick="dateClick2"
-                    android:paddingStart="15dp"
+                    android:textSize="16sp"
                     android:text="DATE"
-                    android:textAlignment="viewStart"
-                    android:textColor="#EB8F90" />
+                    android:textColor="#ffffff" />
 
                 <TextView
                     android:id="@+id/date_text2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:textSize="18sp"
                     android:text="2018.11.12" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/image_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:onClick="imageClick2"
                 android:layout_marginTop="5dp"
-                android:background="@null"
+                android:layout_marginStart="5dp"
+                android:background="#FFB471"
                 android:text="PHOTO"
-                android:textColor="#EB8F90"
+                android:textColor="#ffffff"
                 android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginStart="15dp"
                 android:src="@drawable/ap"
                 />
@@ -65,6 +69,7 @@
                 android:id="@+id/text_name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginStart="15dp"
                 android:text="TEXT"
                 android:textColor="#EB8F90"

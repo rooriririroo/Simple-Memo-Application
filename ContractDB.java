@@ -14,7 +14,8 @@ public class ContractDB {
             + "(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT"+ ", " +  COL_DATE + " TEXT" + ", "
             + COL_IMAGE + " TEXT" + ", " + COL_WRITE + " TEXT" + ")";
     public static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS" + " " + TABLE_NAME;
-    public static final String SQL_SELECT = "SELECT * FROM " + TABLE_NAME;
+    public static final String SQL_SELECT = "SELECT * FROM " + TABLE_NAME +" ORDER BY " + COL_DATE + " DESC" + "," + _ID + " DESC";
+    //public static final String SQL_SELECT = "SELECT * FROM " + TABLE_NAME;
     //public static final String SQL_INSERT = "INSERT OR REPLACE INTO" + TABLE_NAME;
     public static final String SQL_INSERT = "INSERT OR REPLACE INTO " + TABLE_NAME + " "
             + "(" + COL_DATE + ", " + COL_IMAGE + ", " + COL_WRITE + ") VALUES";

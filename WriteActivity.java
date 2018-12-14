@@ -6,10 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
@@ -17,8 +21,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class WriteActivity extends AppCompatActivity {
@@ -37,7 +44,6 @@ public class WriteActivity extends AppCompatActivity {
 
     String input_image;
     Uri uri;
-    Uri buri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +70,14 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     public void updateDate() {
-        date_text.setText(String.format("%d년 %d월 %d일",mYear,mMonth+1,mDay));
+        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일",Locale.KOREA);
+        //Calendar cal = Calendar.getInstance();
+        //date_text.setText(formatter.format(cal.getTime()));
+        //Date date = new Date();
+        //date_text.setText(formatter.format(date));
+        //Date date = new Date();
+        //date_text.setText(formatter.format(date));
+        date_text.setText(String.format("%d년 %02d월 %02d일",mYear,mMonth+1,mDay));
     }
 
 
@@ -109,7 +122,6 @@ public class WriteActivity extends AppCompatActivity {
 
     }
 
-
     //취소버튼 클릭 이벤트
     public void cancelClick (View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -138,13 +150,13 @@ public class WriteActivity extends AppCompatActivity {
     public void saveClick (View v) {
         if(imageView.getDrawable() != null) {
         save_values();
-        Toast.makeText(getApplicationContext(),"save",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"저장",Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
         }
         else {
-            Toast.makeText(getApplicationContext(), "사진 필수", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "사진을 추가해주세요:-)", Toast.LENGTH_SHORT).show();
         }
         //finish();
     }

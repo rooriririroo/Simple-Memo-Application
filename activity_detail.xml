@@ -19,9 +19,8 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_below="@+id/date_detailView"
-        android:layout_marginStart="80dp"
-        android:src="@drawable/ap"
-        />
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="80dp" />
 
     <TextView
         android:id="@+id/write_detailView"
