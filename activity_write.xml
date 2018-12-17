@@ -24,31 +24,53 @@
             <Button
                 android:id="@+id/date_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:onClick="datePopup"
-                android:paddingStart="15dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:background="#FFB471"
+                android:onClick="dateClick"
+                android:textSize="16sp"
                 android:text="DATE"
-                android:textAlignment="viewStart"
-                android:textColor="#EB8F90" />
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/date_text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:textSize="18sp"
                 android:text="2018.11.12" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_name"
+        <Button
+            android:id="@+id/image_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="TEXT"
-            android:textColor="#EB8F90"
+            android:layout_height="40dp"
+            android:onClick="imageClick"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:background="#FFB471"
+            android:text="PHOTO"
+            android:textColor="#ffffff"
             android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp" />
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="15dp"
+                android:text="TEXT"
+                android:textColor="#FFB471"
+                android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edit_text"
@@ -57,6 +79,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             android:background="@null"
+            android:textSize="18sp"
             android:hint="글을 입력하세요" />
     </LinearLayout>
 </ScrollView>
@@ -73,7 +96,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#EB8F90"
-            android:onClick="cancelPopup"
+            android:onClick="cancelClick"
             android:text="취소"
             android:textColor="#ffffff"
             android:textStyle="bold" />
@@ -84,7 +107,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#EB8F90"
-            android:onClick="savePopup"
+            android:onClick="saveClick"
             android:text="저장"
             android:textColor="#ffffff"
             android:textStyle="bold" />
