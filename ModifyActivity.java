@@ -1,4 +1,4 @@
-package com.example.soyeonlee.myapplication8;
+package com.example.soyeonlee.myapplication10;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -51,6 +51,7 @@ public class ModifyActivity extends AppCompatActivity {
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         edit_text2 = (EditText) findViewById(R.id.edit_text2);
 
+
         Intent intent = getIntent();
 
         dateModify = intent.getStringExtra("dateModify");
@@ -77,7 +78,10 @@ public class ModifyActivity extends AppCompatActivity {
 
     //DATE버튼 클릭 이벤트
     public void dateClick2 (View v) {
-        showDialog(DIALOG_DATE);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,mDateSetListener,mYear,mMonth,mDay);
+        datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
+        datePickerDialog.show();
+        //showDialog(DIALOG_DATE);
     }
 
     public void updateDate() {
@@ -95,9 +99,10 @@ public class ModifyActivity extends AppCompatActivity {
         }
     };
 
+    /*
     protected Dialog onCreateDialog(int id) {
         return new DatePickerDialog(this,mDateSetListener,mYear,mMonth,mDay);
-    }
+    }*/
 
     public void imageClick2 (View v) {
         Intent intent = new Intent();
@@ -137,8 +142,9 @@ public class ModifyActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
+                finish();
+                //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                //startActivity(intent);
             }
         });
 
@@ -189,5 +195,30 @@ public class ModifyActivity extends AppCompatActivity {
         db.execSQL(sqlUpdate);
         c.close();
         db.close();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("");
+        builder.setMessage("지금 나가면 글이 저장되지 않습니다.\n나가시겠습니까?");
+
+        // 글 저장 안하고 나가기
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                //startActivity(intent);
+            }
+        });
+
+        // 기존 글쓰기 창으로 돌아가기
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 }
