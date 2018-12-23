@@ -7,15 +7,22 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.Calendar;
 
@@ -29,6 +36,7 @@ public class WriteActivity extends AppCompatActivity {
     TextView date_text;
     EditText edit_text;
     ImageView imageView;
+    ImageButton backButton;
 
     private int mYear;
     private int mMonth;
@@ -43,6 +51,18 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar2);
+
+        //backButton = (ImageButton) findViewById(R.id.backButton);
+        /*backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                //startActivity(intent);
+            }
+        });*/
+
         date_text = (TextView) findViewById(R.id.date_text);
         edit_text = (EditText) findViewById(R.id.edit_text);
         imageView = (ImageView) findViewById(R.id.imageView);
@@ -56,6 +76,30 @@ public class WriteActivity extends AppCompatActivity {
         updateDate();
     }
 
+    public void backClick (View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("");
+        builder.setMessage("지금 나가면 글이 저장되지 않습니다.\n나가시겠습니까?");
+
+        // 글 저장 안하고 나가기
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 기존 글쓰기 창으로 돌아가기
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
+
+    }
+
     //DATE버튼 클릭 이벤트
     public void dateClick (View v) {
         Calendar minDate = Calendar.getInstance();
@@ -66,14 +110,6 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     public void updateDate() {
-
-        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일",Locale.KOREA);
-        //Calendar cal = Calendar.getInstance();
-        //date_text.setText(formatter.format(cal.getTime()));
-        //Date date = new Date();
-        //date_text.setText(formatter.format(date));
-        //Date date = new Date();
-        //date_text.setText(formatter.format(date));
         date_text.setText(String.format("%d년 %02d월 %02d일",mYear,mMonth+1,mDay));
     }
 
@@ -221,5 +257,4 @@ public class WriteActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
 }
