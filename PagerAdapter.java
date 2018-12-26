@@ -27,9 +27,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "First";
+                return "List";
             case 1:
-                return "Second";
+                return "Calendar";
             default:
                 return "";
         }

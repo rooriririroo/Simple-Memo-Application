@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:background="#EB8F90"
+        android:background="#E4B660"
         android:text="TextView" />
 
     <ImageView

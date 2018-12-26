@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
+
     <TextView
         android:id="@+id/date_detailView"
         android:layout_width="match_parent"
@@ -39,24 +40,25 @@
 
         <Button
             android:id="@+id/modify_button"
-            android:onClick="modifyClick"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="#EB8F90"
+            android:background="#E4B660"
             android:text="수정"
+            android:onClick="modifyClick"
             android:textColor="#ffffff"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/delete_button"
-            android:onClick="deleteClick"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="#EB8F90"
+            android:background="#E4B660"
             android:text="삭제"
+            android:onClick="deleteClick"
             android:textColor="#ffffff"
             android:textStyle="bold" />
     </LinearLayout>
+
 </RelativeLayout>

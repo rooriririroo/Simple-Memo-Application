@@ -1,10 +1,11 @@
-package com.example.soyeonlee.myapplication8;
+package com.example.soyeonlee.myapplication10;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,9 +16,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
+
 
     SQLiteDatabase db;
     DBHelper helper;
@@ -25,20 +29,26 @@ public class DetailActivity extends AppCompatActivity {
     ListItemAdapter adapter;
     ArrayList<ListItem> listItemArrayList;
 
-    TextView date_detailView;
-    ImageView image_detailView;
-    TextView write_detailView;
-
     String dateDetail;
     String imageDetail;
     String writeDetail;
     int positionDetail;
+
+    TextView date_detailView;
+    ImageView image_detailView;
+    TextView write_detailView;
+    TextView title2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar2);
+
+        title2 = (TextView) findViewById(R.id.title2);
+        title2.setText("상세메모");
         date_detailView = (TextView) findViewById(R.id.date_detailView);
         image_detailView = (ImageView) findViewById(R.id.image_detailView);
         write_detailView = (TextView) findViewById(R.id.write_detailView);
@@ -58,6 +68,13 @@ public class DetailActivity extends AppCompatActivity {
         write_detailView.setText(writeDetail);
 
         positionDetail = intent.getIntExtra("positionDetail",0);
+
+    }
+
+    public void backClick (View v) {
+        finish();
+        //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        //startActivity(intent);
     }
 
     public void modifyClick(View v) {
@@ -81,9 +98,10 @@ public class DetailActivity extends AppCompatActivity {
 
                 delete_values(positionDetail);
                 Toast.makeText(getApplicationContext(),"삭제",Toast.LENGTH_SHORT).show();
+                finish();
 
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                //startActivity(intent);
             }
         });
 
@@ -107,4 +125,13 @@ public class DetailActivity extends AppCompatActivity {
         c.close();//
         db.close();
     }
+
+    /*
+    @Override
+    public void onItemApplySelected(String date, int image, String write) {
+
+        date_detailView.setText(date);
+        image_detailView.setImageResource(image);
+        write_detailView.setText(write);
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.example.soyeonlee.myapplication8;
+package com.example.soyeonlee.myapplication10;
 
 public class ListItem {
 
@@ -7,8 +7,14 @@ public class ListItem {
     private String image;
 
     //입력 시 편의를 위한 생성자
+    /*
     public ListItem(String date, String text) {
         this.date = date;
+        this.text = text;
+    }*/
+
+    public ListItem(String image, String text) {
+        this.image = image;
         this.text = text;
     }
 

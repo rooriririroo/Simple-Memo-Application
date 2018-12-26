@@ -85,8 +85,9 @@ public class WriteActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
+                finish();
+                //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                //startActivity(intent);
             }
         });
 

@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -41,11 +42,18 @@ public class ModifyActivity extends AppCompatActivity {
 
     String input_image;
     Uri uri;
+    TextView title2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify);
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar2);
+
+        title2 = (TextView) findViewById(R.id.title2);
+        title2.setText("수정하기");
 
         date_text2 = (TextView) findViewById(R.id.date_text2);
         imageView2 = (ImageView) findViewById(R.id.imageView2);
@@ -74,6 +82,12 @@ public class ModifyActivity extends AppCompatActivity {
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
         //updateDate();
+    }
+
+    public void backClick (View v) {
+        finish();
+        //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        //startActivity(intent);
     }
 
     //DATE버튼 클릭 이벤트

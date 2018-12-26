@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,9 +63,12 @@ public class TabFragment2 extends Fragment {
         listView.setAdapter(adapter);
         //listItemArrayList.add(new ListItem("2018.12.02","hello"));
 
+
+
         materialCalendarView = (MaterialCalendarView) rootView.findViewById(R.id.calendarView);
         //materialCalendarView.state().edit().setMinimumDate(CalendarDay.from(2018,11,01));
         materialCalendarView.addDecorators(new SundayDecorator(),new OnDateDecorator());
+
 
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override

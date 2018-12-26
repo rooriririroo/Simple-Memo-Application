@@ -6,22 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:onClick="writeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="15dp"
-        android:clickable="true"
-        app:srcCompat="@drawable/plus2" />
-
-    <ListView
-        android:id="@+id/listView"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_tabs"
+        app:tabIndicatorColor="#CC8A56"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
+        android:layout_height="wrap_content" />
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_pager"
+        android:layout_below="@+id/tl_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

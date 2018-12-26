@@ -12,21 +12,21 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class ListItemAdapter extends BaseAdapter {
+public class ListItemAdapter2 extends BaseAdapter {
 
     Context context;
     private ArrayList<ListItem> listItemArrayList = new ArrayList<>();
     //ArrayList<ListItem> listItemArrayList;
-    ViewHolder viewHolder;
+    ListItemAdapter2.ViewHolder viewHolder;
 
     class ViewHolder {
-        TextView dateItemView;
-        TextView textItemView;
-        ImageView imageItemView;
+        TextView list_date;
+        TextView list_write;
+        ImageView list_image;
     }
 
 
-    public ListItemAdapter(Context context, ArrayList<ListItem> listItemArrayList) {
+    public ListItemAdapter2(Context context, ArrayList<ListItem> listItemArrayList) {
         this.context = context;
         this.listItemArrayList = listItemArrayList;
     }
@@ -57,20 +57,21 @@ public class ListItemAdapter extends BaseAdapter {
         if(convertView == null) {
             // LayoutInflater 클래스를 이용하면 다른 클래스에서도 xml을 가져올 수 있음
             //from(context,)
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,null);
-            viewHolder = new ViewHolder();
-            viewHolder.dateItemView = (TextView) convertView.findViewById(R.id.dateItemView);
-            viewHolder.imageItemView = (ImageView) convertView.findViewById(R.id.imageItemView);
-            viewHolder.textItemView = (TextView) convertView.findViewById(R.id.textItemView);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item2,null);
+
+            viewHolder = new ListItemAdapter2.ViewHolder();
+            viewHolder.list_image = (ImageView) convertView.findViewById(R.id.list_image);
+            //viewHolder.list_date = (TextView) convertView.findViewById(R.id.list_date);
+            viewHolder.list_write = (TextView) convertView.findViewById(R.id.list_write);
             convertView.setTag(viewHolder);
         }
         else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ListItemAdapter2.ViewHolder) convertView.getTag();
         }
-        viewHolder.dateItemView.setText(listItemArrayList.get(position).getDate());
-        Glide.with(context).load(listItemArrayList.get(position).getImage()).into(viewHolder.imageItemView);
+        //viewHolder.list_date.setText(listItemArrayList.get(position).getDate());
+        Glide.with(context).load(listItemArrayList.get(position).getImage()).error(R.drawable.ap).into(viewHolder.list_image);
         //viewHolder.imageItemView.setImageResource(listItemArrayList.get(position).getImage());
-        viewHolder.textItemView.setText(listItemArrayList.get(position).getText());
+        viewHolder.list_write.setText(listItemArrayList.get(position).getText());
 
         return convertView;
     }
